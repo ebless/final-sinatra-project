@@ -6,17 +6,7 @@ require_relative "models/post.rb"
 
 enable :sessions
 
-db = URI.parse('postgres://ebless:postgres@localhost/database')
-
-ActiveRecord::Base.establish_connection(
-	 :adapter  => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
-  :host     => db.host,
-  :username => db.user,
-  :password => db.password,
-  :database => db.path[1..-1],
-  :encoding => 'utf8'
-
-	)
+set :database, {adapter: "sqlite3", database: "db.sqlite3"}
 
 get '/' do
 	@posts = Post.all
@@ -58,4 +48,18 @@ get '/logout' do
 	#Logout the user
 	session[:user] = nil
 	redirect '/'
+end
+
+get '/create_post' do
+	# Render page for creating posts
+	erb :post
+end
+
+post '/create_post' do
+	# Create new post
+	if params[:title] && params[:content] && session[:user]
+		post = Post.create(title: params[:title], user_id: session[:user], content: params[:content])
+		post.save
+		redirect '/'
+	end
 end

@@ -1,11 +1,17 @@
 .post {
 	border-radius: 25px;
-	background-color: #d1d1d1;
+	background-color: #ffffff;
+	border: 1px solid #cdcdcd;
 	padding: 20px;
 	width: 300px;
+	margin: auto;
+	margin-bottom: 25px;
 }
 
 form > * {
 	display: block;
 	margin: 10px;
+}
+body {
+	background-color: #eafcfc;
 }

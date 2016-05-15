@@ -2,7 +2,9 @@
 	<% @posts.each do |post| %>
 	<div class="post">
 		<h2><%= post.title %></h2>
-		<p><%= post.content %></p>	
+		<p><%= post.content %></p>
+		<br>
+		<h5><em>-@<%= User.find_by(id: post.user_id).username %></em></h5>	
 	</div>
 	<% end %>
 </div>
